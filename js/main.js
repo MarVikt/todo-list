@@ -5,8 +5,8 @@ const formTask = document.querySelector('.todo-control');
 const todoList = document.querySelector('.todo-list');
 const completedList = document.querySelector('.todo-completed');
 
-// const taskList = [];
-const taskList = [
+// let taskList = [];
+let taskList = [
   {
     text: "Сварить кофе",
     completed: false
@@ -35,7 +35,7 @@ formTask.addEventListener('submit', function(event) {
 function updateList() {
   todoList.innerHTML = '';
   completed.innerHTML = '';
-  taskList.forEach(function(item) {
+  taskList.forEach(function(item,index) {
     const listItem = document.createElement('li');
   
     listItem.classList.add('todo-item');
@@ -53,6 +53,11 @@ function updateList() {
       item.completed = !item.completed;
       updateList();
     });   
+
+    listItem.querySelector('.todo-remove').addEventListener('click', function () {
+      taskList.splice(index, 1);
+      updateList();
+    });
 
   });
 }
