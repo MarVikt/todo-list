@@ -1,21 +1,8 @@
 const formTask = document.querySelector('.todo-control');
-// const buttonPlus = document.getElementById('add');
-// const buttonsRemove = document.querySelectorAll('.todo-remove');
-// const buttonsCompleted = document.querySelectorAll('.todo-complete');
 const todoList = document.querySelector('.todo-list');
 const completedList = document.querySelector('.todo-completed');
 
-// let taskList = [];
-let taskList = [
-  {
-    text: "Сварить кофе",
-    completed: false
-  },
-  {
-    text: "Помыть посуду",
-    completed: true
-  }
-];
+let taskList = [];
 
 formTask.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -34,7 +21,7 @@ formTask.addEventListener('submit', function(event) {
 
 function updateList() {
   todoList.innerHTML = '';
-  completed.innerHTML = '';
+  completedList.innerHTML = '';
   taskList.forEach(function(item,index) {
     const listItem = document.createElement('li');
   
@@ -60,10 +47,10 @@ function updateList() {
     });
 
   });
+  localStorage.tasks = JSON.stringify(taskList);
 }
 
+if (typeof localStorage.tasks !== 'undefined') {
+  taskList = JSON.parse(localStorage.tasks);
+}
 updateList();
-
-console.log(taskList);
-
-
